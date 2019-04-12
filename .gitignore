@@ -20,3 +20,4 @@ php/logs/php-service.out.log.old
 *.log
 *.old
 *.pid
+mariadb/data

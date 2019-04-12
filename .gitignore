@@ -16,3 +16,10 @@ mariadb/data/mysql/user.MYD
 mariadb/data/mysql/user.MYI
 mariadb/data/performance_schema/db.opt
 php/logs/php-service.wrapper.log
+nginx/logs/access.log
+nginx/logs/error.log
+nginx/logs/nginx.pid
+nginx/logs/nginx-service.err.log
+nginx/logs/nginx-service.out.log
+nginx/logs/nginx-service.wrapper.log
+php/logs/php-service.wrapper.log

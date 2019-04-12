@@ -23746,3 +23746,5 @@
 2019-04-12 02:47:37 - Stopping php
 2019-04-12 02:47:37 - ProcessKill 8144
 2019-04-12 02:47:37 - Finished php
+2019-04-12 06:24:59 - Starting F:\Server\php\php-cgi.exe  -c F:\Server\php\php.ini -b 127.0.0.1:9000 
+2019-04-12 06:24:59 - Started 8856

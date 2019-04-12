@@ -1,1 +1,4 @@
 # server
+NGINX
+PHP
+CLOUDFLARE

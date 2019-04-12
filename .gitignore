@@ -1,6 +1,5 @@
-desktop.ini
+.vscode
 nginx/www/alex
 nginx/www/share
 nginx/logs
-mariadb
-.vscode
+mariadb/data

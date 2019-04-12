@@ -1,5 +1,5 @@
 # server
-NGINX (WITH RTMP)
-PHP
-MARIADB
-CLOUDFLARE (updater)
+# NGINX (WITH RTMP)
+# PHP
+# MARIADB
+# CLOUDFLARE (updater)

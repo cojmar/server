@@ -1,4 +1,3 @@
-# server
 # NGINX (WITH RTMP)
 # PHP
 # MARIADB

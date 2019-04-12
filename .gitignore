@@ -10,3 +10,6 @@ nginx/logs/nginx-service.err.log
 nginx/logs/nginx-service.out.log
 nginx/logs/nginx-service.wrapper.log
 php/logs/php-service.wrapper.log
+nginx/logs/nginx-service.err.log.old
+nginx/logs/nginx-service.out.log.old
+

@@ -1,0 +1,1 @@
+createobject("WScript.Shell").run "CloudFlareDDNS.exe", 2

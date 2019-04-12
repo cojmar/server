@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="UTF-8">
+		<style>
+		html, body  
+		{
+			background-color:#000000;
+			margin: 0;
+			height: 100%;
+			overflow:hidden;
+		}
+		</style>
+	</head>
+<body>
+<script type="text/javascript" src="/swfobject.js"></script>
+<script type="text/javascript" src="/ParsedQueryString.js"></script>
+<script type="text/javascript">
+var player = null;
+
+function loadStream(url) {
+	
+  player.setMediaResourceURL(url);  	
+}
+
+function getlink(url) {
+  return "/vod.html?src=" + encodeURIComponent(url);
+}
+
+function jsbridge(playerId, event, data) {
+  if (player == null) {
+	player = document.getElementById(playerId);
+  }
+  switch(event) {
+	case "onJavaScriptBridgeCreated":
+	  listStreams(teststreams,"streamlist");
+	  break;
+	 case "timeChange":
+	 case "timeupdate":
+	 case "progress":
+	   break;
+	  case "playing":
+	  	var volume =(typeof pqs._parameters.muted !='undefined')?0:1;	  	  	
+	  	player.setVolume(volume);
+	  break
+	 default:
+	  
+	}
+}
+
+	// Collect query parameters in an object that we can
+	// forward to SWFObject:
+
+	var pqs = new ParsedQueryString();
+
+	if(typeof pqs._parameters.channel[0] !='undefined')
+	{
+		var loc = document.location.href.split('.html');loc = loc[0];
+		loc = loc.split("//");loc = loc[1];
+		loc = loc.split("/");loc = loc[0];
+		loc = loc.split(":");loc = loc[0];
+		pqs._parameters.src=["rtmp://"+loc+"/live/"+pqs._parameters.channel[0]];
+	}
+
+	var parameterNames = pqs.params(false);
+	var parameters = {
+		autoPlay: "true",
+		verbose: false,
+		controlBarAutoHide: "true",
+		controlBarAutoHideTimeout:1,
+		controlBarFullScreenAutoHide: "true",
+		poster: "images/poster.png",
+		javascriptCallbackFunction: "jsbridge",
+		plugin_hls: "/flashlsOSMF.swf",
+		hls_minbufferlength: -1,
+		hls_maxbufferlength: 30,
+		hls_lowbufferlength: 3,
+		hls_seekmode: "KEYFRAME",
+		hls_startfromlevel: -1,
+		hls_seekfromlevel: -1,
+		hls_live_flushurlcache: false,
+		hls_info: false,
+		hls_debug: false,
+		hls_debug2: false,
+		hls_warn: false,
+		hls_error: false,
+		hls_fragmentloadmaxretry : -1,
+		hls_manifestloadmaxretry : -1,
+		hls_capleveltostage : false,
+		hls_maxlevelcappingmode : "downscale"
+	};
+
+	for (var i = 0; i < parameterNames.length; i++) {
+		var parameterName = parameterNames[i];
+		parameters[parameterName] = pqs.param(parameterName) ||
+		parameters[parameterName];
+	}
+
+	var wmodeValue = "direct";
+	var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+	if (parameters.hasOwnProperty("wmode"))
+	{
+		if (wmodeOptions.indexOf(parameters.wmode) >= 0)
+		{
+			wmodeValue = parameters.wmode;
+		}
+		delete parameters.wmode;
+	}
+
+	// Embed the player SWF:
+	swfobject.embedSWF(
+		"GrindPlayer.swf"
+		, "GrindPlayer"
+		, "100%"
+		, "100%"
+		, "10.1.0"
+		, "expressInstall.swf"
+		, parameters
+		, {
+			allowFullScreen: "true",
+			allowScriptAccess: "always",
+            bgcolor: "#000000",
+			wmode: wmodeValue
+		}
+		, {
+			name: "GrindPlayer"
+		}
+	);
+
+</script>
+
+	<div id="GrindPlayer">
+		<p>
+			Alternative content
+		</p>
+	</div>
+
+
+
+
+
+    </body>
+</html>

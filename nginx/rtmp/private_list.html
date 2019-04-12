@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1.0, user-scalable=no">
+		<title></title>
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+		<style>
+		html, body  
+		{
+			margin: 0px;
+			padding:10px;
+			height: 99%;
+		}
+		</style>
+		<!--JS -->
+	    <script src="jquery.min.js"></script>
+	    <script src="bootstrap.min.js"></script>	
+		<script>
+		$(function()		
+		{
+			var loc = document.location.href.split('.html');loc = loc[0];
+			loc = loc.split("//");loc = loc[1];
+			loc = loc.split("/");loc = loc[0];
+			var loc_live = 'http://'+loc+'/player.html?channel=';
+			var loc_private = 'http://'+loc+'/private.html?channel=';
+			var loc_hls = 'http://'+loc+'/html5player.html?channel=';			
+			var loc_abs = loc.split(":");loc_abs = loc_abs[0];
+			$('.server_url').html('rtmp://'+loc_abs+'/live');
+			$('.server_url2').html('rtmp://'+loc_abs+'/hls');
+
+			$('.show_server_info').bind('click',function()
+			{
+				$('.show_server_info').hide(1000);
+				$('.server_info').show(1000);
+			});
+			$.ajax(
+			{
+				url: 'http://'+loc+'/stats',
+				dataType:'text'
+			}).done(function(r)
+			{				
+				var xml = $(r);
+
+				var data_model=
+				{
+					'name'		:'',
+					'time'		:'',
+					'bw_in'		:0
+				};
+
+				xml.find('stream').each(function(i, el) 
+				{
+					var str_data = {};
+
+					for (var ii in data_model )
+					{
+						str_data[ii] = $(el).find(ii).text() || data_model[ii];
+					}
+					console.log(str_data);
+
+					var type = $(el).parents('application').find('name').text();
+
+					
+					if (str_data.name !='' && str_data.bw_in !=0 && type.indexOf('private') != -1)
+					{
+
+						var loc_player = loc_private;
+						var template= '<div style="float:left;margin:10px;"><a style="color:#595959;" href="'+loc_player+str_data.name+'"><b>'+str_data.name+'</b><span style="color:#9f9f9f"> - click to open in player</span></a><br><iframe allowfullscreen src="'+loc_player+str_data.name+'&muted=1" frameBorder="0"></iframe></div>';
+						$('.channels').append(template);						
+					}
+				});				
+			});			
+		});
+		</script>
+	</head>
+	<body>
+		<h2>Active streams</h2>
+		<div class="channels" style="padding:10px;">
+		</div>
+	</body>
+</html>	

@@ -1,0 +1,19 @@
+<service>
+	<id>nginx</id>
+	<name>nginx</name>
+	<description>nginx</description>
+	<executable>F:\Server\nginx\nginx.exe</executable>
+	<startargument>-p</startargument>
+	<startargument>F:\Server\nginx</startargument>
+	<stopexecutable>F:\Server\nginx\nginx.exe</stopexecutable>
+	<stopargument>-s</stopargument>
+	<stopargument>stop</stopargument>
+	<stoptimeout>5sec</stoptimeout>
+	<onfailure action="restart" />
+	<onfailure action="restart" delay="10 sec"/>
+	<onfailure action="restart" delay="20 sec"/>
+	<onfailure action="none" />
+	<resetfailure>1 hour</resetfailure>
+	<logpath>F:\Server\nginx\logs</logpath>
+	<logmode>roll</logmode>
+</service>

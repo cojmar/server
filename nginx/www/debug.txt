@@ -1,0 +1,10 @@
+Array
+(
+    [app] => private
+    [name] => cam2
+    [call] => publish
+    [clientid] => 455
+    [pageurl] => 
+    [user] => mypublishuser
+    [pass] => mypublishpass
+)

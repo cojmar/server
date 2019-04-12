@@ -16,3 +16,7 @@ php/logs/php-service.err.log
 php/logs/php-service.err.log.old
 php/logs/php-service.out.log
 php/logs/php-service.out.log.old
+
+*.log
+*.old
+*.pid

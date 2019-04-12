@@ -1,5 +1,4 @@
 .vscode
-mariadb/data
 nginx/www/alex
 nginx/www/share
 php/logs/php-service.wrapper.log
